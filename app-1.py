@@ -260,12 +260,12 @@ def main():
         phytotherapie = st.checkbox("Phytothérapie")
         ains = st.checkbox("Usage régulier d'AINS")
 
-    tab_med, tab_pat = st.tabs(["🩺 ESPACE MÉDECIN (Expertise)", "👤 ESPACE PATIENT (Accompagnement)"])
+    tab_med, tab_pat = st.tabs(["ESPACE MÉDECIN (Expertise)", "ESPACE PATIENT (Accompagnement)"])
 
     with tab_med:
         col_in, col_res = st.columns([1, 1.8])
         with col_in:
-            st.subheader("📥 Données Biologiques")
+            st.subheader("Données Biologiques")
             creat = st.number_input("Créatinine (mg/dL)", 0.1, 20.0, 1.8)
             uree = st.number_input("Urée (g/L)", 0.1, 5.0, 0.6)
             sys = st.number_input("TA Systolique (mmHg)", 80, 220, 150)
@@ -314,7 +314,7 @@ def main():
                     st.warning("🔍 Analyse SHAP non disponible pour ce patient.")
 
 
-                st.caption("💡 Le graphique ci-dessus justifie mathématiquement le stade prédit.")
+                st.caption("Le graphique ci-dessus justifie mathématiquement le stade prédit.")
                 st.markdown("</div>", unsafe_allow_html=True)
 
                 # Justification
@@ -334,7 +334,7 @@ def main():
                 if shap_fig is not None:
                     st.plotly_chart(shap_fig, use_container_width=True)
                 else:
-                    st.warning("🔍 Analyse SHAP non disponible pour ce patient.")
+                    st.warning("Analyse SHAP non disponible pour ce patient.")
 
 
                                 
@@ -398,7 +398,7 @@ Note : Ce document est une aide à la décision générée par IA.
                 buffer.seek(0)
 
                 st.download_button(
-                    "📥 Télécharger le Rapport Médical Technique (PDF)",
+                    "Télécharger le Rapport Médical Technique (PDF)",
                     buffer,
                     file_name=f"Rapport_Expert_{pat_name}.pdf",
                     mime="application/pdf"
