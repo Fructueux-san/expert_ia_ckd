@@ -26,7 +26,7 @@ from io import BytesIO
 # --- CONFIGURATION & DESIGN ---
 st.set_page_config(page_title="NephroExpert AI - Expertise XAI", page_icon="🏥", layout="wide")
 
-st.sidebar.header("🔐 Configuration OpenAI")
+st.sidebar.header("Configuration OpenAI")
 
 user_api_key = st.sidebar.text_input(
     "Entrez votre clé OpenAI",
@@ -36,7 +36,7 @@ user_api_key = st.sidebar.text_input(
 if user_api_key:
     client = OpenAI(api_key=user_api_key)
     llm_available = True
-    st.sidebar.success("Clé API chargée ✅")
+    st.sidebar.success("Clé API chargée")
 else:
     llm_available = False
     st.sidebar.warning("Mode IA désactivé")
@@ -156,8 +156,8 @@ def generate_ai_interpretation(report_text, egfr, stade, justif):
             )
             ai_analysis = response.choices[0].message.content
         except Exception as e:   # <- attrape toutes les erreurs OpenAI
-            print(f'⚠️ Analyse IA indisponible : {str(e)}')
-            ai_analysis = "⚠️ Analyse IA indisponible"
+            print(f'Analyse IA indisponible : {str(e)}')
+            ai_analysis = "Analyse IA indisponible"
 
     return ai_analysis
 
@@ -240,16 +240,16 @@ def plot_biomarkers_radar(data):
     return fig
 
 def main():
-    st.markdown("<div class='main-header'>🏥 NEPHROEXPERT AI : ANALYSE CLINIQUE AVANCÉE</div>", unsafe_allow_html=True)
+    st.markdown("<div class='main-header'>NEPHROEXPERT AI : ANALYSE CLINIQUE AVANCÉE</div>", unsafe_allow_html=True)
     
     try:
         clf, features_list = load_assets()
     except:
-        st.error("⚠️ Fichiers du modèle (.joblib) introuvables.")
+        st.error("Fichiers du modèle (.joblib) introuvables.")
         return
 
     with st.sidebar:
-        st.header("📋 Dossier Patient")
+        st.header("Dossier Patient")
         doc_name = st.text_input("Médecin Référent", "Dr. S. Koné")
         pat_name = st.text_input("Identité Patient", "M. Jean Robert")
         age = st.number_input("Âge", 1, 110, 65)
@@ -376,7 +376,7 @@ Note : Ce document est une aide à la décision générée par IA.
 
                 with st.spinner("Analyse IA en cours..."):
                     ai_analysis = generate_ai_interpretation(full_report,egfr,stade,justif)
-                    st.subheader("🧠 Analyse IA Expert")
+                    st.subheader("Analyse IA Expert")
                     st.write(ai_analysis)
 
             
@@ -414,7 +414,7 @@ Note : Ce document est une aide à la décision générée par IA.
                 st.write(f"Votre bilan indique que vos reins fonctionnent à environ **{int(res['egfr'])}%** de leur capacité.")
                 st.table(pd.DataFrame({"Semaine": ["S1", "S2", "S3", "S4"], "Action": ["Bilan biologique", "Mesure ta consommation quotidienne", "Consultation Diététique", "Contrôle Néphrologue"]}))
                 st.markdown("</div>", unsafe_allow_html=True)
-                with st.spinner("🧠 Génération du rapport IA patient..."):
+                with st.spinner("Génération du rapport IA patient..."):
                     ai_text_patient = None
                     if llm_available:
                         with st.spinner("Génération du rapport IA patient..."):
@@ -423,10 +423,10 @@ Note : Ce document est une aide à la décision générée par IA.
                                     pat_name, res['egfr'], res['stade'], res['justif']
                                 )
                             except Exception as e:
-                                st.warning(f"⚠️ Impossible de générer le rapport patient : {str(e)}")   
+                                st.warning(f"Impossible de générer le rapport patient : {str(e)}")   
                                 ai_text_patient=None
 
-                    st.subheader("🧠 Analyse IA Expert")
+                    st.subheader("Analyse IA Expert")
                     if ai_text_patient:
                         st.write(ai_text_patient)
                     else:
@@ -444,7 +444,7 @@ Note : Ce document est une aide à la décision générée par IA.
                     )
 
                     st.download_button(
-                        "📥 Télécharger votre rapport patient (PDF)",
+                        "Télécharger votre rapport patient (PDF)",
                         patient_pdf,
                         file_name=f"Rapport_Patient_{pat_name}.pdf",
                         mime="application/pdf"
