@@ -10,3 +10,4 @@ openai
 scikit-learn
 reportlab
 seaborn
+xgboost
